@@ -16,4 +16,12 @@
         <shortDescription>New Customer Description</shortDescription>
         <value>This is a new customer. Make sure we deal them well!</value>
     </labels>
+    <labels>
+        <fullName>Biotechnology_Description</fullName>
+        <categories>Flow - Account Auto Launched Flow</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Biotechnology_Description</shortDescription>
+        <value>This account belongs to biotechnology industry</value>
+    </labels>
 </CustomLabels>
