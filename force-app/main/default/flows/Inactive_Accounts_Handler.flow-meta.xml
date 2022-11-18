@@ -7,6 +7,9 @@
         <locationY>335</locationY>
         <actionName>AccountInvocable</actionName>
         <actionType>apex</actionType>
+        <faultConnector>
+            <targetReference>Create_Application_Log</targetReference>
+        </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>accountIds</name>
@@ -65,4 +68,47 @@
         <triggerType>RecordAfterSave</triggerType>
     </start>
     <status>Active</status>
+    <subflows>
+        <name>Create_Application_Log</name>
+        <label>Create Application Log</label>
+        <locationX>440</locationX>
+        <locationY>455</locationY>
+        <flowName>Create_Application_Log</flowName>
+        <inputAssignments>
+            <name>ErrorRecords</name>
+            <value>
+                <elementReference>$Flow.CurrentRecord</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>ExceptionMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>LogType</name>
+            <value>
+                <stringValue>Error</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>StackTrace</name>
+            <value>
+                <elementReference>$Flow.InterviewGuid</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>TargetName</name>
+            <value>
+                <stringValue>Inactive Accounts Handler</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>TargetType</name>
+            <value>
+                <stringValue>Flow</stringValue>
+            </value>
+        </inputAssignments>
+    </subflows>
 </Flow>

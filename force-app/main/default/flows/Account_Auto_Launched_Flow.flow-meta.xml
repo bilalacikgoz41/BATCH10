@@ -7,6 +7,10 @@
         <locationY>398</locationY>
         <actionName>chatterPost</actionName>
         <actionType>chatterPost</actionType>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Create_Application_Log</targetReference>
+        </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
             <name>text</name>
@@ -58,6 +62,10 @@
         <connector>
             <targetReference>Post_to_Account_Chatter</targetReference>
         </connector>
+        <faultConnector>
+            <isGoTo>true</isGoTo>
+            <targetReference>Create_Application_Log</targetReference>
+        </faultConnector>
         <inputAssignments>
             <field>ActivityDate</field>
             <value>
@@ -99,6 +107,9 @@
         <connector>
             <targetReference>Create_Task</targetReference>
         </connector>
+        <faultConnector>
+            <targetReference>Create_Application_Log</targetReference>
+        </faultConnector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -123,6 +134,49 @@
         </connector>
     </start>
     <status>Active</status>
+    <subflows>
+        <name>Create_Application_Log</name>
+        <label>Create Application Log</label>
+        <locationX>968</locationX>
+        <locationY>278</locationY>
+        <flowName>Create_Application_Log</flowName>
+        <inputAssignments>
+            <name>ErrorRecords</name>
+            <value>
+                <elementReference>$Flow.CurrentRecord</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>ExceptionMessage</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>LogType</name>
+            <value>
+                <stringValue>Error</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>StackTrace</name>
+            <value>
+                <elementReference>$Flow.InterviewGuid</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>TargetName</name>
+            <value>
+                <stringValue>Account Auto Launched Flow</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>TargetType</name>
+            <value>
+                <stringValue>Flow</stringValue>
+            </value>
+        </inputAssignments>
+    </subflows>
     <variables>
         <name>AccountId</name>
         <dataType>String</dataType>
