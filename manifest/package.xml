@@ -10,6 +10,8 @@
     </types>
     <types>
         <members>Account</members>
+        <members>Contact</members>
+        <members>Case</members>
         <members>Loan_Application__c</members>
         <members>Notification_Event__e</members>
         <members>Application_Log__c</members>
