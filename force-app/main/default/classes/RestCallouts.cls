@@ -103,4 +103,27 @@ public with sharing class RestCallouts {
         }
         return response;
     }
+
+    public static HttpResponse postAnimal() {
+        //1. Prepare HttpRequest and wrap the necessary information in it
+        HttpRequest request = new HttpRequest();
+        request.setMethod('POST');
+        request.setEndpoint('https://th-apex-http-callout.herokuapp.com/animals');
+        String jsonString = '{"name" : "dog"}';
+        request.setBody(jsonString);
+        request.setHeader('Content-Type', 'application/json;charset=UTF-8');
+
+        //2. Prepare internet
+        Http http = new Http();
+
+        //3. Send the request over the internet to receive response
+        HttpResponse response = http.send(request);
+        System.debug(response);
+
+        //4. Process the response
+        if(response.getStatusCode() == 201) {
+            System.debug('Animal has been posted successfully!');
+        }
+        return response;
+    }
 }
