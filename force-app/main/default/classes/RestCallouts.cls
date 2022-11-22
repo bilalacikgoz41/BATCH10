@@ -126,4 +126,13 @@ public with sharing class RestCallouts {
         }
         return response;
     }
+
+    //70e1f461fd475135683473e734663791d988ca49336b3a1002405be2ff00ed29
+    //https://gorest.co.in/public/v2/users
+    public static HttpResponse postGorestContact() {
+        //1. Prepare HttpRequest and wrap the necessary information in it
+        //2. Prepare internet
+        //3. Send the request over the internet to receive response
+        //4. Process the response
+    }
 }
