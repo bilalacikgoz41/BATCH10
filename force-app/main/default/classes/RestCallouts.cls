@@ -135,17 +135,13 @@ public with sharing class RestCallouts {
         request.setMethod('POST');
         request.setEndpoint('https://gorest.co.in/public/v2/users');
         //1.1 Get the gorest contact records and prepare them into json string
-        List<Gorest_Contact__c> contacts = [SELECT Name, Email__c, Gender__c, Status__c FROM Gorest_Contact__c LIMIT 2];
-        List<GorestContactWrapper> wrappers = new List<GorestContactWrapper>();
-        for(Gorest_Contact__c con : contacts) {
+        Gorest_Contact__c con = [SELECT Name, Email__c, Gender__c, Status__c FROM Gorest_Contact__c LIMIT 1];
             GorestContactWrapper wrap = new GorestContactWrapper();
             wrap.name = con.Name;
             wrap.email = con.Email__c;
             wrap.gender = con.Gender__c;
             wrap.status = con.Status__c;
-            wrappers.add(wrap);
-        }
-        String jsonString = JSON.serialize(wrappers);
+        String jsonString = JSON.serialize(wrap);
         System.debug(jsonString);
         request.setBody(jsonString);
         request.setHeader('Content-Type', 'application/json;charset=UTF-8');
