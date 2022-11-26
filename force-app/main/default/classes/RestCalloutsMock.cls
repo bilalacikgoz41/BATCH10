@@ -1,3 +1,4 @@
+@isTest
 public with sharing class RestCalloutsMock implements HttpCalloutMock {
     public HttpResponse respond(HttpRequest request) {
         if(request.getMethod() == 'GET' && request.getEndpoint() == 'https://th-apex-http-callout.herokuapp.com/animals') {
