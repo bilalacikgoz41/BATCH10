@@ -56,4 +56,37 @@ public with sharing class CaseServicesTest {
         System.assertEquals('Case has been deleted successfully!', status);
         Test.stopTest();
     }
+
+    @isTest 
+    private static void putCaseTest() {
+        Test.startTest();
+        //1. lets not pass case id and test
+        Id caseId = CaseServices.putCase(null, 'High', 'Email', 'Test Subject', 'Test Description');
+        System.assertNotEquals(null, caseId);
+
+        //2. lets pass case id but update 2 fields
+        Id caseId2 = CaseServices.putCase(caseId, 'Medium', 'Web', 'Test Subject', 'Test Description');
+        System.assertEquals(caseId, caseId2);
+        Test.stopTest();
+    }
+
+    @isTest 
+    private static void patchCaseTest() {
+        //prepare RestRequest
+        Test.startTest();
+        Case cs = [SELECT Id, Priority, Origin, Subject, Description FROM Case WHERE Priority = 'High' LIMIT 1];
+        cs.Priority = 'Low';
+        String jsonString = JSON.serialize(cs);
+        RestRequest request = new RestRequest();
+        request.requestBody = Blob.valueOf(jsonString);
+        request.httpMethod = 'PATCH';
+
+        //Prepare RestContext
+        RestContext.request = request;
+
+        //Perform tests
+        Case updatedCase = CaseServices.patchCase();
+        System.assertEquals('Low', updatedCase.Priority);
+        Test.stopTest();
+    }
 }
