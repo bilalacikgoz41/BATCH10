@@ -7,4 +7,9 @@ export default class HelloWorld extends LightningElement {
         city: "Houston",
         country: "United States"
     };
+
+    //write a method to sum two numbers
+    sum(a, b) {
+        return a+b;
+    }
 }

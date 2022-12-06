@@ -16,6 +16,7 @@
         <members>Notification_Event__e</members>
         <members>Application_Log__c</members>
         <members>Employee__c</members>
+        <members>Airlines__c</members>
         <name>CustomObject</name>
     </types>
     <types>
